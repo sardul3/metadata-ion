@@ -24,8 +24,9 @@ export class CreateTicketComponent implements OnInit {
 
   submitTicket(form) {
     console.log(form.value);
+    console.log(form.value.ticketProject);
     // tslint:disable-next-line: max-line-length
-    this.ticketService.createTicket(form.value.ticketTitle, form.value.ticketDescription, new Date()).subscribe(data => {
+    this.ticketService.createTicket(form.value.ticketTitle, form.value.ticketDescription, form.value.ticketProject).subscribe(data => {
       console.log(data);
     });
     form.reset();

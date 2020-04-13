@@ -1,21 +1,22 @@
-<form #createTicket="ngForm" (ngSubmit)="submitTicket(createTicket.form)">
-<ion-list>
-  <ion-item>
-    <ion-label position="floating">Title</ion-label>
-    <ion-input name="ticketTitle" ngModel #titleField="ngModel" required></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">Description</ion-label>
-    <ion-textarea name="ticketDescription" ngModel #descriptionField="ngModel" required></ion-textarea>
-  </ion-item>
-  <ion-item>
-    <ion-label>Project</ion-label>
-    <ion-select placeholder="Select One" name="ticketProject" ngModel #projectField="ngModel">
-      <ion-select-option *ngFor="let project of availableProjects" [value]="project.name">{{project.name}}</ion-select-option>
-    </ion-select>
-  </ion-item>
 
-  <ion-button type="submit" expand="block" [disabled]="!createTicket.valid">Create</ion-button>
-</ion-list>
-
-</form>
+      <form #createTicket="ngForm" (ngSubmit)="submitTicket(createTicket.form)" class="ion-padding ion-margin" >
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Title</ion-label>
+            <ion-input name="ticketTitle" ngModel #titleField="ngModel" required></ion-input>
+          </ion-item>
+          <ion-item class="inputField">
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea name="ticketDescription" ngModel #descriptionField="ngModel" required></ion-textarea>
+          </ion-item>
+          <ion-item class="inputField">
+            <ion-label>Project</ion-label>
+            <ion-select placeholder="Select One" name="ticketProject" ngModel #projectField="ngModel">
+              <ion-select-option *ngFor="let project of availableProjects" [value]="project.id">{{project.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        
+          <ion-button type="submit" expand="block" [disabled]="!createTicket.valid" class="inputField">Create</ion-button>
+        </ion-list>
+        
+        </form>

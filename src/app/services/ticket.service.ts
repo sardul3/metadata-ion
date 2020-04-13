@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Ticket } from '../commons/ticket';
 import { Project } from '../commons/project';
 
@@ -11,13 +11,14 @@ export class TicketService {
   constructor(private http: HttpClient) { }
 
   getTickets() {
-    return this.http.get<TicketResponse>('http://localhost:8080/tickets').pipe(
-      map(response => response._embedded.tickets)
+    return this.http.get('http://localhost:8080/get-tickets').pipe(
+      map(response => response)
     );
   }
 
-  createTicket(title: string, description: string, createdOn: Date) {
-    return this.http.post('http://localhost:8080/tickets', {title, description, createdOn, createdBy: 'admin' });
+  createTicket(title: string, description: string, projectId: number) {
+    // tslint:disable-next-line: max-line-length
+    return this.http.post('http://localhost:8080/create-ticket', {title, description, createdBy: 'admin', createdOn: new Date(), projectId });
   }
 
   getProjects() {
@@ -25,6 +26,19 @@ export class TicketService {
       map(response => response._embedded.projects)
     );
   }
+
+  // getProject(ticketId: number) {
+  //   return this.http.get<Project>(`http://localhost:8080/tickets/${ticketId}/project`).pipe(take(1),
+  //     map(response => response)
+  //   );
+  // }
+
+  deleteTicket(ticketId: number) {
+    return this.http.delete(`http://localhost:8080/tickets/${ticketId}`).pipe(take(1),
+      map(response => response)
+    );
+  }
+  
 }
 
 
