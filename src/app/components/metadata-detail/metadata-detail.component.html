@@ -1,0 +1,52 @@
+<ion-grid *ngIf="selectedStation.stationName!=null">
+  <ion-row>
+
+    <ion-col>
+      <ion-card button="true" color="primary" mode="ios">
+        <ion-card-header>
+          <ion-card-title>{{selectedStation.stationName}}</ion-card-title>
+          <ion-card-subtitle>{{selectedStation.county}}, {{selectedStation.city}}</ion-card-subtitle>
+          <ion-card-subtitle>{{selectedStation.phone}}</ion-card-subtitle>
+
+        </ion-card-header>
+      
+        <ion-card-content>
+          <p>
+            {{selectedStation.ipAddress}}
+           </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col>
+      <ion-card button="true" color="primary" mode="ios">
+        <ion-item color="light"> 
+          <ion-icon name="pin" slot="start"></ion-icon>
+          <ion-label>Location</ion-label>
+          <ion-button fill="outline" slot="end">View</ion-button>
+        </ion-item>
+        <ion-card-content>
+            <ion-label>
+              Latitude: {{selectedStation.latitude}}
+            </ion-label>
+            <br/>
+            <ion-label>
+              Longitude: {{selectedStation.longitude}}
+            </ion-label>
+            <br/>
+            <ion-label>
+              Elevation: {{selectedStation.elevation}}
+            </ion-label>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<ion-card button="true" color="primary" mode="ios">
+  <ion-item>
+    <ion-icon name="hammer" slot="start"></ion-icon>
+    <ion-label>{{selectedStation.tower}}</ion-label>
+  </ion-item>
+</ion-card>

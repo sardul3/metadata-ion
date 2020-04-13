@@ -1,0 +1,11 @@
+
+<ion-list style="overflow: scroll; max-height: 600px;" lines="none">
+
+  <ion-searchbar showCancelButton="focus" animated autocomplete="on"></ion-searchbar>
+
+  <ion-item href="#" class="ion-text-center ion-activated" *ngFor="let station of stations"  (click)="onClick(station.id)">
+    <ion-label>{{station.stationName}}</ion-label>
+  </ion-item>
+</ion-list>
+
+
