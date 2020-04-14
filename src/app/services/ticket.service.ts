@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, take } from 'rxjs/operators';
 import { Ticket } from '../commons/ticket';
 import { Project } from '../commons/project';
+import { Developer } from '../commons/developer';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,16 @@ export class TicketService {
       map(response => response)
     );
   }
-  
+
+  getDevelopers() {
+    return this.http.get<DeveloperResponse>('http://localhost:8080/developers').pipe(
+      map(response => response._embedded.developers)
+    );
+  }
+
+  assignDeveloperToTicket(ticketId: number, developerId: number) {
+    return this.http.post('http://localhost:8080/add-developer', {ticketId, developerId});
+  }
 }
 
 
@@ -52,6 +62,12 @@ interface TicketResponse {
 interface ProjectResponse {
   _embedded: {
     projects: Project[];
+  };
+}
+
+interface DeveloperResponse {
+  _embedded: {
+    developers: Developer[];
   };
 }
 

@@ -19,9 +19,14 @@
             <ion-card-subtitle>{{ticket.createdOn | timeAgo}} </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
+            <ion-buttons>
               <ion-button fill="outline" color="light" (click)="deleteTicket(ticket.id)">
                 <ion-icon slot="icon-only" name="trash"></ion-icon>
               </ion-button>
+              <ion-button fill="outline" color="light" (click)="showAddDevelopers($event, ticket)">
+                <ion-icon name="person-add-outline"></ion-icon>              
+              </ion-button>
+            </ion-buttons>
           </ion-card-content>
         </ion-card>
       </ion-col>

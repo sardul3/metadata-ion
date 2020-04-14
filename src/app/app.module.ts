@@ -1,3 +1,4 @@
+import { AddDevelopersComponent } from './components/ticket/add-developers/add-developers.component';
 import { FormsModule } from '@angular/forms';
 import { CreateTicketComponent } from './components/ticket/create-ticket/create-ticket.component';
 import { TicketListComponent } from './components/ticket/ticket-list/ticket-list.component';
@@ -22,8 +23,8 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 @NgModule({
   declarations: [AppComponent,  HomepageComponent, MetadataDetailComponent,
                  MetadataListComponent, TicketListComponent, CreateTicketComponent,
-                TimeAgoPipe],
-  entryComponents: [CreateTicketComponent],
+                TimeAgoPipe, AddDevelopersComponent],
+  entryComponents: [CreateTicketComponent, AddDevelopersComponent],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
   providers: [
     StatusBar,

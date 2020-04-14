@@ -1,3 +1,4 @@
+import { Developer } from './developer';
 import { Project } from './project';
 export class Ticket {
     id: number;
@@ -7,5 +8,5 @@ export class Ticket {
     createdOn: Date;
     projectId: number;
     project: Project;
-    developers: string[];
+    developers: Developer[];
   }
