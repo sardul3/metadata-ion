@@ -15,10 +15,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   submitLogin(form) {
-    console.log(form.value.email);
-    console.log(form.value.password);
 
-    this.authService.executeAuthService(form.value.email, form.value.password).subscribe(data => {
+    this.authService.executeAuthService(form.value.username, form.value.password).subscribe(data => {
       if (this.authService.userIsLoggedIn) {
           this.router.navigateByUrl('ticket');
       }

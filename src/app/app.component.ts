@@ -28,7 +28,6 @@ export class AppComponent {
       this.splashScreen.hide();
     });
     this.userIsLoggedIn = this.authService.userIsLoggedIn();
-    console.log(this.userIsLoggedIn);
 
   }
 

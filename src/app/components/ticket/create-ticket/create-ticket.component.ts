@@ -19,15 +19,12 @@ export class CreateTicketComponent implements OnInit {
   ngOnInit() {
     this.ticketService.getProjects().subscribe(data => {
       this.availableProjects = data;
-    })
+    });
   }
 
   submitTicket(form) {
-    console.log(form.value);
-    console.log(form.value.ticketProject);
     // tslint:disable-next-line: max-line-length
     this.ticketService.createTicket(form.value.ticketTitle, form.value.ticketDescription, form.value.ticketProject).subscribe(data => {
-      console.log(data);
     });
     form.reset();
     this.modalController.dismiss();

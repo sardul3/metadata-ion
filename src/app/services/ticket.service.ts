@@ -1,3 +1,4 @@
+import { AuthService } from './auth/auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, take } from 'rxjs/operators';
@@ -9,7 +10,8 @@ import { Developer } from '../commons/developer';
   providedIn: 'root'
 })
 export class TicketService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private authService: AuthService) { }
 
   createBasicAuthHeader() {
     const username = 'user';
@@ -20,9 +22,6 @@ export class TicketService {
 
 
   getTickets() {
-    // const basicAuthHeader = this.createBasicAuthHeader();
-    // const headers = new HttpHeaders({Authorization: 'Bearer ' + localStorage.getItem('jwt')});
-    // console.log('headers', headers);
     return this.http.get('http://localhost:8080/get-tickets').pipe(
       map(response => response)
     );
@@ -30,7 +29,9 @@ export class TicketService {
 
   createTicket(title: string, description: string, projectId: number) {
     // tslint:disable-next-line: max-line-length
-    return this.http.post('http://localhost:8080/create-ticket', {title, description, createdBy: 'admin', createdOn: new Date(), projectId });
+    return this.http.post('http://localhost:8080/create-ticket', {title, description,
+               createdBy: this.authService.userIsLoggedIn() ? localStorage.getItem('user') : 'admin',
+                createdOn: new Date(), projectId });
   }
 
   getProjects() {

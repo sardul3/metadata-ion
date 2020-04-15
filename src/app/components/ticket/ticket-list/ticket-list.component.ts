@@ -38,7 +38,6 @@ export class TicketListComponent implements OnInit {
 
 
    deleteTicket(ticketId: number) {
-    console.log('delete pressed');
     this.alertController.create({
       header: 'Delete the ticket',
       subHeader: 'Are you sure?',
