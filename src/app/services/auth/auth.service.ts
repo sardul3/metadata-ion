@@ -22,6 +22,12 @@ export class AuthService {
       })
     );
   }
+
+  registerUser(username: string, email: string, password: string) {
+    return this.http.post('http://localhost:8080/signup', {username, email, password}, {responseType: 'text'}).pipe(
+      map(response => response)
+    );
+  }
 }
 
 interface LoginResponse {

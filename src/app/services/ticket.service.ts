@@ -29,6 +29,7 @@ export class TicketService {
 
   createTicket(title: string, description: string, projectId: number) {
     // tslint:disable-next-line: max-line-length
+    console.log(new Date());
     return this.http.post('http://localhost:8080/create-ticket', {title, description,
                createdBy: this.authService.userIsLoggedIn() ? localStorage.getItem('user') : 'admin',
                 createdOn: new Date(), projectId });

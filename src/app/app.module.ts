@@ -1,3 +1,4 @@
+import { SignupComponent } from './components/signup/signup.component';
 import { HttpInterceptorService } from './services/auth/http-interceptor.service';
 import { LoginComponent } from './components/login/login.component';
 import { AddDevelopersComponent } from './components/ticket/add-developers/add-developers.component';
@@ -25,7 +26,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 @NgModule({
   declarations: [AppComponent,  HomepageComponent, MetadataDetailComponent,
                  MetadataListComponent, TicketListComponent, CreateTicketComponent,
-                TimeAgoPipe, AddDevelopersComponent, LoginComponent],
+                TimeAgoPipe, AddDevelopersComponent, LoginComponent, SignupComponent],
   entryComponents: [CreateTicketComponent, AddDevelopersComponent],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
   providers: [

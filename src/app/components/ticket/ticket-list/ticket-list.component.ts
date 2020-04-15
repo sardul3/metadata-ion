@@ -65,13 +65,18 @@ export class TicketListComponent implements OnInit {
 
   }
 
-showAddDevelopers(ev: any, ticket: Ticket) {
+showAddDevelopers(ev, ticket: Ticket) {
+
   this.popoverController.create({
     component: AddDevelopersComponent,
-    componentProps: {ticket: ticket},
+    componentProps: {ticket},
     event: ev,
+    cssClass: ['custom-popover'],
     translucent: true
-  }).then(popoverEl => popoverEl.present());
+  }).then(popoverEl => {
+    popoverEl.present();
+  }
+    );
 }
 
 }
