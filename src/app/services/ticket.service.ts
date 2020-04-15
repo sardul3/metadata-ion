@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, take } from 'rxjs/operators';
 import { Ticket } from '../commons/ticket';
 import { Project } from '../commons/project';
@@ -11,7 +11,18 @@ import { Developer } from '../commons/developer';
 export class TicketService {
   constructor(private http: HttpClient) { }
 
+  createBasicAuthHeader() {
+    const username = 'user';
+    const password = 'user';
+    const basicHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+    return basicHeaderString;
+  }
+
+
   getTickets() {
+    // const basicAuthHeader = this.createBasicAuthHeader();
+    // const headers = new HttpHeaders({Authorization: 'Bearer ' + localStorage.getItem('jwt')});
+    // console.log('headers', headers);
     return this.http.get('http://localhost:8080/get-tickets').pipe(
       map(response => response)
     );

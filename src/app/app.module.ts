@@ -1,3 +1,5 @@
+import { HttpInterceptorService } from './services/auth/http-interceptor.service';
+import { LoginComponent } from './components/login/login.component';
 import { AddDevelopersComponent } from './components/ticket/add-developers/add-developers.component';
 import { FormsModule } from '@angular/forms';
 import { CreateTicketComponent } from './components/ticket/create-ticket/create-ticket.component';
@@ -8,7 +10,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -23,10 +25,11 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 @NgModule({
   declarations: [AppComponent,  HomepageComponent, MetadataDetailComponent,
                  MetadataListComponent, TicketListComponent, CreateTicketComponent,
-                TimeAgoPipe, AddDevelopersComponent],
+                TimeAgoPipe, AddDevelopersComponent, LoginComponent],
   entryComponents: [CreateTicketComponent, AddDevelopersComponent],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

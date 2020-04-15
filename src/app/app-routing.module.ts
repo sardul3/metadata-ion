@@ -2,10 +2,13 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { TicketListComponent } from './components/ticket/ticket-list/ticket-list.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' },
   { path: 'ticket', component: TicketListComponent },
+  { path: 'login', component: LoginComponent },
+
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
 
 

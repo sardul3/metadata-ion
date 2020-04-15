@@ -41,12 +41,14 @@
       </ion-card>
     </ion-col>
 
+    <ion-card button="true" color="primary" mode="ios">
+      <ion-item>
+        <ion-icon name="hammer" slot="start"></ion-icon>
+        <ion-label>{{selectedStation.tower}}</ion-label>
+      </ion-item>
+    </ion-card>
+
   </ion-row>
 </ion-grid>
 
-<ion-card button="true" color="primary" mode="ios">
-  <ion-item>
-    <ion-icon name="hammer" slot="start"></ion-icon>
-    <ion-label>{{selectedStation.tower}}</ion-label>
-  </ion-item>
-</ion-card>
+
