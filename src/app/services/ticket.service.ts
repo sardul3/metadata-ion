@@ -1,5 +1,5 @@
 import { AuthService } from './auth/auth.service';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, take } from 'rxjs/operators';
 import { Ticket } from '../commons/ticket';
@@ -10,6 +10,9 @@ import { Developer } from '../commons/developer';
   providedIn: 'root'
 })
 export class TicketService {
+  searchText = new EventEmitter<string>();
+  filterByAuthor = new EventEmitter<boolean>();
+
   constructor(private http: HttpClient,
               private authService: AuthService) { }
 

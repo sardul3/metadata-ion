@@ -1,10 +1,12 @@
+import { AuthService } from './../../../services/auth/auth.service';
 import { AddDevelopersComponent } from './../add-developers/add-developers.component';
 import { Project } from './../../../commons/project';
 import { CreateTicketComponent } from './../create-ticket/create-ticket.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ticket } from 'src/app/commons/ticket';
 import { TicketService } from 'src/app/services/ticket.service';
-import { ModalController, ToastController, AlertController, PopoverController } from '@ionic/angular';
+import { ModalController, ToastController, AlertController, PopoverController, IonReorderGroup } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-ticket-list',
@@ -13,21 +15,40 @@ import { ModalController, ToastController, AlertController, PopoverController } 
 })
 export class TicketListComponent implements OnInit {
   tickets;
+  filteredTickets;
+  searchText;
+  filterByAuthor;
 
   constructor(private ticketService: TicketService,
               private modalController: ModalController,
               private toastController: ToastController,
               private alertController: AlertController,
-              private popoverController: PopoverController) { }
+              private popoverController: PopoverController,
+              private authService: AuthService) { }
 
-  ngOnInit(): void {}
-
-  ionViewWillEnter() {
+  ngOnInit(): void {
     this.ticketService.getTickets().subscribe(data => {
       this.tickets = data;
+      this.filteredTickets = this.tickets;
+    });
 
+  }
+
+  ionViewWillEnter() {
+    this.ticketService.filterByAuthor.subscribe(data => {
+      if (data) {
+        this.filteredTickets = this.tickets.filter(ticket => ticket.createdBy === this.authService.getUsername());
+      } else {
+        this.ngOnInit();
+      }
+    });
+    
+    this.ticketService.searchText.subscribe(searchText => {
+      this.searchText = searchText;
+      this.filteredTickets = this.tickets.filter(ticket => ticket.title.toLowerCase().includes(searchText.toLowerCase()));
     });
   }
+
   async presentModal() {
     const modal = await this.modalController.create({
       component: CreateTicketComponent
@@ -77,6 +98,12 @@ showAddDevelopers(ev, ticket: Ticket) {
     popoverEl.present();
   }
     );
+}
+
+seeStatus(check) {
+  console.log(!check.checked);
+  this.filterByAuthor = !check.checked;
+  this.ticketService.filterByAuthor.emit(!check.checked);
 }
 
 }

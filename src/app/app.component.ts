@@ -27,7 +27,9 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-    this.userIsLoggedIn = this.authService.userIsLoggedIn();
+    this.authService.loggedInUserEvent.subscribe(data => {
+      this.userIsLoggedIn = data;
+    });
 
   }
 

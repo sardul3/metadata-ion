@@ -1,16 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  loggedInUserEvent = new EventEmitter<boolean>();
 
   constructor(private http: HttpClient) { }
 
   userIsLoggedIn() {
     return localStorage.getItem('user') != null && localStorage.getItem('user').length > 0;
+  }
+
+  getUsername() {
+    return localStorage.getItem('user');
   }
 
   executeAuthService(username: string, password: string) {
@@ -24,7 +29,7 @@ export class AuthService {
   }
 
   registerUser(username: string, email: string, password: string) {
-    return this.http.post('http://localhost:8080/signup', {username, email, password}, {responseType: 'text'}).pipe(
+    return this.http.post('http://localhost:8080/signup', {username, email, password}).pipe(
       map(response => response)
     );
   }

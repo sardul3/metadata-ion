@@ -11,7 +11,7 @@
           </ion-item>
           <ion-item class="inputField">
             <ion-label>Project</ion-label>
-            <ion-select placeholder="Select One" name="ticketProject" ngModel #projectField="ngModel">
+            <ion-select placeholder="Select One" name="ticketProject" ngModel #projectField="ngModel" required>
               <ion-select-option *ngFor="let project of availableProjects" [value]="project.id">{{project.name}}</ion-select-option>
             </ion-select>
           </ion-item>

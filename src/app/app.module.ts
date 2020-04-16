@@ -1,3 +1,4 @@
+import { SearchAndFilterComponent } from './components/search-and-filter/search-and-filter.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HttpInterceptorService } from './services/auth/http-interceptor.service';
 import { LoginComponent } from './components/login/login.component';
@@ -21,18 +22,20 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import {TimeAgoPipe} from 'time-ago-pipe';
+import { AuthGuard } from './services/auth/auth.guard';
 
 
 @NgModule({
   declarations: [AppComponent,  HomepageComponent, MetadataDetailComponent,
                  MetadataListComponent, TicketListComponent, CreateTicketComponent,
-                TimeAgoPipe, AddDevelopersComponent, LoginComponent, SignupComponent],
+                TimeAgoPipe, AddDevelopersComponent, LoginComponent, SignupComponent, SearchAndFilterComponent],
   entryComponents: [CreateTicketComponent, AddDevelopersComponent],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
     StatusBar,
     SplashScreen,
+    AuthGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
