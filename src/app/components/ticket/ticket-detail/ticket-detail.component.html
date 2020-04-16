@@ -35,7 +35,7 @@
           <ion-card-content>
             <ion-grid>
               <ion-row >
-                <ion-col style="overflow-y: scroll; height: 400px;">
+                <ion-col style="overflow-y: scroll; max-height: 400px;" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                   <h1> Present Developers</h1>
                 <ion-list>
                   <ion-item *ngFor="let developer of developers">
@@ -54,7 +54,7 @@
                 </ion-list>
               </ion-col>
 
-              <ion-col style="overflow-y: scroll; height: 400px;">
+              <ion-col style="overflow-y: scroll; max-height: 400px;" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <h1> Invite Developers</h1>
                 <ion-list>
                   <ion-item *ngFor="let developer of inviteDevelopers">
@@ -88,7 +88,7 @@
         <ion-card-content>
           <ion-grid >
             <ion-row >
-              <ion-col size="8" offset="2" style="overflow-y: scroll; height: 400px;">
+              <ion-col size="8" offset="2" style="overflow-y: scroll; height: 500px;" size-md="12" size-sm="12" size-xs="12" offset-md="0" offset-sm="0" offset-xs="0" >
               <ion-list>
                 <ion-item *ngFor="let note of notes">
                   <ion-avatar slot="start">
@@ -108,10 +108,10 @@
           <ion-grid>
             <form #noteForm="ngForm" (ngSubmit)="noteSubmit(noteForm, ticket)">
             <ion-row class="ion-align-items-end">
-              <ion-col size="5" offset="3">
+              <ion-col size="7" offset="2">
                 <ion-item>
                   <ion-label position="floating">Note</ion-label>
-                  <ion-input name="note" ngModel required></ion-input>
+                  <ion-textarea name="note" ngModel required></ion-textarea>
                 </ion-item>
               </ion-col>
               <ion-col size="1">
