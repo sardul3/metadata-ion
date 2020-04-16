@@ -53,7 +53,7 @@ export class TicketListComponent implements OnInit {
     const modal = await this.modalController.create({
       component: CreateTicketComponent
     });
-    modal.onDidDismiss().then(el => this.ionViewWillEnter());
+    modal.onDidDismiss().then(el => this.ngOnInit());
     return await modal.present();
   }
 
@@ -71,12 +71,12 @@ export class TicketListComponent implements OnInit {
                   handler: () => {
                     this.ticketService.deleteTicket(ticketId).subscribe(data => {
                       const toast = this.toastController.create({
-                        color: 'primary',
+                        color: 'warning',
                         message: 'Ticket has been deleted',
                         duration: 2000
                       }).then(el => {
                         el.present();
-                        this.ionViewWillEnter();
+                        this.ngOnInit();
                       });
                     });
                   }

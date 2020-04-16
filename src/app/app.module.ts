@@ -1,3 +1,4 @@
+import { TicketDetailComponent } from './components/ticket/ticket-detail/ticket-detail.component';
 import { SearchAndFilterComponent } from './components/search-and-filter/search-and-filter.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HttpInterceptorService } from './services/auth/http-interceptor.service';
@@ -28,7 +29,7 @@ import { AuthGuard } from './services/auth/auth.guard';
 @NgModule({
   declarations: [AppComponent,  HomepageComponent, MetadataDetailComponent,
                  MetadataListComponent, TicketListComponent, CreateTicketComponent,
-                TimeAgoPipe, AddDevelopersComponent, LoginComponent, SignupComponent, SearchAndFilterComponent],
+                TimeAgoPipe, AddDevelopersComponent, LoginComponent, SignupComponent, SearchAndFilterComponent, TicketDetailComponent],
   entryComponents: [CreateTicketComponent, AddDevelopersComponent],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
   providers: [

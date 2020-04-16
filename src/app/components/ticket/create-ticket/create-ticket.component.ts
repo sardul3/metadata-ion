@@ -25,6 +25,7 @@ export class CreateTicketComponent implements OnInit {
   submitTicket(form) {
     // tslint:disable-next-line: max-line-length
     this.ticketService.createTicket(form.value.ticketTitle, form.value.ticketDescription, form.value.ticketProject).subscribe(data => {
+      
     });
     form.reset();
     this.modalController.dismiss();

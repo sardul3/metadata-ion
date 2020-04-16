@@ -38,7 +38,10 @@
                 <ion-icon slot="icon-only" name="trash"></ion-icon>
               </ion-button>
               <ion-button fill="outline" color="light" (click)="showAddDevelopers($event, ticket)">
-                <ion-icon name="person-add-outline"></ion-icon>              
+                <ion-icon slot="icon-only" name="person-add-outline"></ion-icon>              
+              </ion-button>
+              <ion-button fill="outline" color="light" routerLink="/ticket/{{ticket.id}}">
+                <ion-icon slot="icon-only" name="enter-outline" ></ion-icon>              
               </ion-button>
             </ion-buttons>
           </ion-card-content>
@@ -46,11 +49,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="presentModal()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
 </ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="presentModal()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+

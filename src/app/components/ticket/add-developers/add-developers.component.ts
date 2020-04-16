@@ -33,7 +33,7 @@ export class AddDevelopersComponent implements OnInit {
       this.ticketService.assignDeveloperToTicket(this.ticket.id, developer.id).subscribe(data => {
         this.ticket = data;
         const toast = this.toastController.create({
-          color: 'primary',
+          color: 'success',
           message: `${developer.name} is added to the ticket`,
           duration: 2000
         }).then(el => {

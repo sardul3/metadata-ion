@@ -5,6 +5,7 @@ import { map, take } from 'rxjs/operators';
 import { Ticket } from '../commons/ticket';
 import { Project } from '../commons/project';
 import { Developer } from '../commons/developer';
+import { Note } from '../commons/note';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,12 @@ export class TicketService {
 
   getTickets() {
     return this.http.get('http://localhost:8080/get-tickets').pipe(
+      map(response => response)
+    );
+  }
+
+  getTicket(id: number) {
+    return this.http.get<Ticket>(`http://localhost:8080/get-ticket/${id}`).pipe(
       map(response => response)
     );
   }
@@ -65,6 +72,17 @@ export class TicketService {
   assignDeveloperToTicket(ticketId: number, developerId: number) {
     return this.http.post('http://localhost:8080/add-developer', {ticketId, developerId});
   }
+
+  removeDeveloperFromTicket(devId: number, ticketId: number) {
+    return this.http.post('http://localhost:8080/remove-developer', {devId, ticketId});
+  }
+
+  assignNoteToTicket( noteText: string, createdAt: Date, ticketId: number) {
+    const createdBy = this.authService.getUsername();
+    return this.http.post<NoteInterface>('http://localhost:8080/add-note', {text: noteText, createdAt, ticketId, createdBy }).pipe(
+      map(response => response.notes)
+    );
+  }
 }
 
 
@@ -72,6 +90,10 @@ interface TicketResponse {
   _embedded: {
     tickets: Ticket[];
   };
+}
+
+interface NoteInterface {
+  notes: Note;
 }
 
 
