@@ -29,8 +29,9 @@ export class AppComponent {
     });
     this.authService.loggedInUserEvent.subscribe(data => {
       this.userIsLoggedIn = data;
-    });
+      console.log(this.userIsLoggedIn);
 
+    });
   }
 
 
@@ -39,6 +40,7 @@ export class AppComponent {
   }
 
   logout() {
+    this.authService.loggedInUserEvent.emit(false);
     localStorage.removeItem('jwt');
     localStorage.removeItem('user');
     this.close();

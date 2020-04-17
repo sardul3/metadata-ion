@@ -33,6 +33,13 @@ export class AuthService {
       map(response => response)
     );
   }
+
+  checkUsername(username: string) {
+    console.log(username);
+    return this.http.post('http://localhost:8080/check-username', {username}).pipe(
+      map(response => response)
+    );
+  }
 }
 
 interface LoginResponse {

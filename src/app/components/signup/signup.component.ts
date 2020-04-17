@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
   isLoading = false;
   errorMessage: string = null;
+  validUsername = true;
 
   constructor(private authService: AuthService,
               private loadingController: LoadingController,
@@ -41,6 +42,18 @@ export class SignupComponent implements OnInit {
         });
       }
     );
+  }
+
+  checkUsername(usernameField) {
+    console.log(usernameField.value);
+    this.authService.checkUsername(usernameField.value).subscribe(data => {
+      if (data['message'] === 'duplicate') {
+        this.validUsername = false;
+      }
+      else {
+        this.validUsername = true;
+      }
+    });
   }
 
 }

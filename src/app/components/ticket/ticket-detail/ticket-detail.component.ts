@@ -16,7 +16,7 @@ import { Developer } from 'src/app/commons/developer';
 export class TicketDetailComponent implements OnInit {
   ticketId: number;
   ticket = new Ticket();
-  notes: Note[];
+  notes: Note[] = [];
   loggedInUser: string;
   developers: Developer[] = [];
   inviteDevelopers: Developer[] = [];
@@ -31,16 +31,10 @@ export class TicketDetailComponent implements OnInit {
               private toastController: ToastController) { }
 
   ngOnInit() {
-    // if (this.ticket.status) {
-      
-    // }
-
-
-
-    this.ticketService.getDevelopers().subscribe(devs => {
-      this.allDevelopers = devs;
-      this.inviteDevelopers = this.allDevelopers.filter(dev => !this.isDeveloperPresent(dev));
-    });
+    // this.ticketService.getDevelopers().subscribe(devs => {
+    //   this.allDevelopers = devs;
+    //   this.inviteDevelopers = this.allDevelopers.filter(dev => !this.isDeveloperPresent(dev));
+    // });
   }
 
   ionViewWillEnter() {
@@ -48,22 +42,27 @@ export class TicketDetailComponent implements OnInit {
     this.route.paramMap.subscribe(data => {
       if (this.route.snapshot.paramMap.has('id')) {
         this.ticketId = +this.route.snapshot.paramMap.get('id');
+        this.ticketService.getTicket(this.ticketId).subscribe(ticket => {
+          this.ticket = ticket;
+          if (ticket) {
+            this.ticketService.getDevelopers().subscribe(devs => {
+              this.allDevelopers = devs;
+              this.inviteDevelopers = this.allDevelopers.filter(dev => !this.isDeveloperPresent(dev));
+            });
+            this.rangeLabel = this.ticket.status;
+            this.notes = ticket.notes;
+            this.developers = ticket.developers;
+            this.inviteDevelopers = this.allDevelopers.filter(dev => !this.isDeveloperPresent(dev));
+            this.rangeLabel = this.ticket.status;
+            this.rangeColor = this.mapStatus(this.rangeLabel)[0];
+            this.rangeValue = +this.mapStatus(this.rangeLabel)[1];
+          }
+         
+        });
       }
     });
 
-    this.ticketService.getTicket(this.ticketId).subscribe(ticket => {
-      this.ticket = ticket;
-      this.rangeLabel = this.ticket.status;
-      this.notes = ticket.notes;
-      this.developers = ticket.developers;
-      this.inviteDevelopers = this.allDevelopers.filter(dev => !this.isDeveloperPresent(dev));
-      this.rangeLabel = this.ticket.status;
 
-      this.rangeColor = this.mapStatus(this.rangeLabel)[0];
-      this.rangeValue = +this.mapStatus(this.rangeLabel)[1];
-      console.log(this.rangeLabel);
-      console.log(this.ticketId);
-    });
 
 
   }
@@ -162,7 +161,6 @@ export class TicketDetailComponent implements OnInit {
         this.rangeLabel = 'Ticket resolved';
       }
       this.ticketService.setStatus(this.ticketId, this.rangeLabel).subscribe(data => {
-        console.log(data);
         this.rangeLabel = data.status;
     });
 
