@@ -37,6 +37,12 @@ export class TicketService {
     );
   }
 
+  setStatus(ticketId: number, status: string) {
+    return this.http.post<Ticket>(`http://localhost:8080/set-status`, {ticketId, status}).pipe(
+      map(response => response)
+    );
+  }
+
   createTicket(title: string, description: string, projectId: number) {
     // tslint:disable-next-line: max-line-length
     console.log(new Date());

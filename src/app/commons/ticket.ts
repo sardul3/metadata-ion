@@ -11,4 +11,6 @@ export class Ticket {
     project: Project;
     developers: Developer[];
     notes: Note[];
+    status: string;
+
   }

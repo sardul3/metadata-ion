@@ -42,7 +42,7 @@ export class TicketListComponent implements OnInit {
         this.ngOnInit();
       }
     });
-    
+
     this.ticketService.searchText.subscribe(searchText => {
       this.searchText = searchText;
       this.filteredTickets = this.tickets.filter(ticket => ticket.title.toLowerCase().includes(searchText.toLowerCase()));

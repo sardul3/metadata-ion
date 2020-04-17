@@ -18,41 +18,54 @@ export class TicketDetailComponent implements OnInit {
   ticket = new Ticket();
   notes: Note[];
   loggedInUser: string;
-  developers: Developer[];
-  inviteDevelopers: Developer[];
-  allDevelopers: Developer[];
+  developers: Developer[] = [];
+  inviteDevelopers: Developer[] = [];
+  allDevelopers: Developer[] = [];
+  rangeValue: number;
+  rangeColor = 'danger';
+  rangeLabel = 'Not Started';
 
   constructor(private route: ActivatedRoute,
               private ticketService: TicketService,
               private authService: AuthService,
               private toastController: ToastController) { }
 
-
-
   ngOnInit() {
+    // if (this.ticket.status) {
+      
+    // }
+
+
+
     this.ticketService.getDevelopers().subscribe(devs => {
       this.allDevelopers = devs;
       this.inviteDevelopers = this.allDevelopers.filter(dev => !this.isDeveloperPresent(dev));
-
     });
   }
 
   ionViewWillEnter() {
-    // this.ticketService.getDevelopers().subscribe(devs => {
-    //   this.allDevelopers = devs;
-    // });
 
     this.route.paramMap.subscribe(data => {
       if (this.route.snapshot.paramMap.has('id')) {
         this.ticketId = +this.route.snapshot.paramMap.get('id');
-        this.ticketService.getTicket(this.ticketId).subscribe(ticket => {
-          this.ticket = ticket;
-          this.notes = ticket.notes;
-          this.developers = ticket.developers;
-          this.inviteDevelopers = this.allDevelopers.filter(dev => !this.isDeveloperPresent(dev));
-        });
       }
     });
+
+    this.ticketService.getTicket(this.ticketId).subscribe(ticket => {
+      this.ticket = ticket;
+      this.rangeLabel = this.ticket.status;
+      this.notes = ticket.notes;
+      this.developers = ticket.developers;
+      this.inviteDevelopers = this.allDevelopers.filter(dev => !this.isDeveloperPresent(dev));
+      this.rangeLabel = this.ticket.status;
+
+      this.rangeColor = this.mapStatus(this.rangeLabel)[0];
+      this.rangeValue = +this.mapStatus(this.rangeLabel)[1];
+      console.log(this.rangeLabel);
+      console.log(this.ticketId);
+    });
+
+
   }
 
   noteSubmit(form: NgForm, ticket: Ticket) {
@@ -60,7 +73,6 @@ export class TicketDetailComponent implements OnInit {
     const noteText = form.form.value.note;
     this.ticketService.assignNoteToTicket(noteText, new Date(), ticket.id).subscribe(data => {
       this.notes.push(data);
-      // this.ngOnInit();
       this.ionViewWillEnter();
     });
     form.reset();
@@ -77,7 +89,6 @@ export class TicketDetailComponent implements OnInit {
   }
 
   addDeveloperToTicket(developer: Developer) {
-    console.log(!this.isDeveloperPresent(developer));
     if (!this.isDeveloperPresent(developer)) {
       this.ticketService.assignDeveloperToTicket(this.ticket.id, developer.id).subscribe(data => {
         const toast = this.toastController.create({
@@ -93,8 +104,6 @@ export class TicketDetailComponent implements OnInit {
   }
 
   removeDeveloperFromTicket(developer: Developer) {
-    console.log(developer.id);
-    console.log(this.ticket.id);
     this.ticketService.removeDeveloperFromTicket(developer.id, this.ticket.id).subscribe(data => {
       const toast = this.toastController.create({
         color: 'warning',
@@ -104,6 +113,57 @@ export class TicketDetailComponent implements OnInit {
         el.present();
         this.ionViewWillEnter();
       });
+    });
+  }
+
+  getAvatarFromNoteAuthor(note: Note) {
+    // tslint:disable-next-line: prefer-for-of
+    for ( let i = 0; i < this.allDevelopers.length; i++ ) {
+      if (this.allDevelopers[i].name === note.createdBy) {
+        return this.allDevelopers[i].avatar;
+      }
+    }
+    return '2';
+  }
+
+  mapStatus(status: string) {
+    switch (status) {
+      case 'Not Started':
+        this.rangeValue = 0;
+        this.rangeColor = 'danger';
+        return ['danger', '0'];
+      case 'Initiated':
+        this.rangeValue = 10;
+        this.rangeColor = 'secondary';
+        return ['secondary', '10'];
+      case 'Almost Done':
+        this.rangeValue = 20;
+        this.rangeColor = 'tertiary';
+        return ['tertiary', '20'];
+      case 'Ticket resolved':
+        this.rangeValue = 30;
+        this.rangeColor = 'success';
+        return ['success', '30'];
+    }
+  }
+
+  statusChange(event) {
+      if (this.rangeValue === 0 ) {
+        this.rangeColor = 'danger';
+        this.rangeLabel = 'Not Started';
+      } else if (this.rangeValue > 0 && this.rangeValue <= 10 ) {
+        this.rangeColor = 'secondary';
+        this.rangeLabel = 'Initiated';
+      }  else if (this.rangeValue > 10  && this.rangeValue <= 20 ) {
+        this.rangeColor = 'tertiary';
+        this.rangeLabel = 'Almost Done';
+      } else if (this.rangeValue > 20  && this.rangeValue <= 30 ) {
+        this.rangeColor = 'success';
+        this.rangeLabel = 'Ticket resolved';
+      }
+      this.ticketService.setStatus(this.ticketId, this.rangeLabel).subscribe(data => {
+        console.log(data);
+        this.rangeLabel = data.status;
     });
 
   }

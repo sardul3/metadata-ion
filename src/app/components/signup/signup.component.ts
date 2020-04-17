@@ -17,7 +17,9 @@ export class SignupComponent implements OnInit {
               private router: Router,
               private toastController: ToastController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   submitSignup(form) {
     this.isLoading = true;
