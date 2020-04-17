@@ -36,12 +36,16 @@
                   <ion-input name="email" ngModel #emailField="ngModel" required email></ion-input>
                 </ion-item>
                 <ion-item *ngIf=" emailField.errors && emailField.touched" lines="none">
-                  <ion-label color="warning">Please enter a valid username!</ion-label>
+                  <ion-label color="warning">Please enter a valid email!</ion-label>
                 </ion-item>
                 <ion-item class="inputField">
                   <ion-label position="floating">Password</ion-label>
-                  <ion-input type="password" name="password" ngModel #passwordField="ngModel" required></ion-input>
+                  <ion-input (input)="passwordStrength(passwordField)" type="password" name="password" ngModel #passwordField="ngModel" required></ion-input>
                 </ion-item>
+                <!-- <ion-item *ngIf="passwordField.value" lines="none">
+                  <ion-range [(color)]="labelColor" [(value)]="labelValue" max="50" pin="true"></ion-range>
+                </ion-item> -->
+                  <ion-label *ngIf="passwordField.value" [color]="labelColor">Your password is {{labelStrength}}</ion-label>
 
                 <ion-button type="submit" expand="block" [disabled]="!createSignup.valid || !validUsername" class="inputField">Register
                 </ion-button>
