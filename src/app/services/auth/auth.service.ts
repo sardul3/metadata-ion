@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { User } from 'src/app/commons/user';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,12 @@ export class AuthService {
 
   getUsername() {
     return localStorage.getItem('user');
+  }
+
+  getUser() {
+    return this.http.get<User>('http://localhost:8080/get-user').pipe(
+      map(response => response)
+    );
   }
 
   executeAuthService(username: string, password: string) {

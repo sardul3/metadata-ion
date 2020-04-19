@@ -46,7 +46,7 @@
             <ion-grid>
               <ion-row >
                 <ion-col style="overflow-y: scroll; max-height: 400px;" size-lg="6" size-md="12" size-sm="12" size-xs="12">
-                  <h1> Present Developers</h1>
+                  <h1 class="ion-text-center"> Present Developers</h1>
                 <ion-list>
                   <ion-item *ngFor="let developer of developers">
                     <ion-avatar slot="start">
@@ -65,7 +65,7 @@
               </ion-col>
 
               <ion-col style="overflow-y: scroll; max-height: 400px;" size-lg="6" size-md="12" size-sm="12" size-xs="12">
-                <h1> Invite Developers</h1>
+                <h1 class="ion-text-center"> Invite Developers</h1>
                 <ion-list>
                   <ion-item *ngFor="let developer of inviteDevelopers">
                     <ion-avatar slot="start">
@@ -98,15 +98,24 @@
           <ion-grid >
             <ion-row >
               <ion-col size="8" offset="2" style="overflow-y: scroll; height: 500px;" size-md="12" size-sm="12" size-xs="12" offset-md="0" offset-sm="0" offset-xs="0" >
-              <ion-list>
+              <ion-list lines="none">
                 <ion-item *ngFor="let note of notes">
-                  <ion-avatar slot="start">
+                  <ion-avatar slot="start" *ngIf="note.createdBy!==loggedInUser.username">
                     <img src="./assets/icon/avatars/{{getAvatarFromNoteAuthor(note)}}.png">
                   </ion-avatar>
-                  <ion-label>
+                  <ion-label *ngIf="note.createdBy!==loggedInUser.username">
                     <h2> {{note.createdBy}}</h2>
-                    <h3> {{note.createdAt | timeAgo}}</h3>
-                    <p>{{note.text}}</p>
+                    <p> {{note.createdAt | timeAgo}}</p>
+                    <h3 class="ion-text-wrap">{{note.text}}</h3>
+                  </ion-label>
+
+                  <ion-avatar slot="end" *ngIf="note.createdBy===loggedInUser.username">
+                    <img src="./assets/icon/avatars/{{getAvatarFromNoteAuthor(note)}}.png">
+                  </ion-avatar>
+                  <ion-label *ngIf="note.createdBy===loggedInUser.username" class="ion-text-right">
+                      <h2>  {{note.createdBy}}</h2>
+                      <p> {{note.createdAt | timeAgo}}</p>
+                      <h3 class="ion-text-wrap">{{note.text}}</h3>
                   </ion-label>
                 </ion-item>
               </ion-list>
@@ -118,9 +127,10 @@
             <form #noteForm="ngForm" (ngSubmit)="noteSubmit(noteForm, ticket)">
             <ion-row class="ion-align-items-end">
               <ion-col size="7" offset="2">
+
                 <ion-item>
                   <ion-label position="floating">Note</ion-label>
-                  <ion-textarea name="note" ngModel required></ion-textarea>
+                  <ion-textarea #noteText  name="note" ngModel required></ion-textarea>
                 </ion-item>
               </ion-col>
               <ion-col size="1">

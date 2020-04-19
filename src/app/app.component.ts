@@ -1,3 +1,4 @@
+import { TicketService } from 'src/app/services/ticket.service';
 import { AuthService } from './services/auth/auth.service';
 import { Component } from '@angular/core';
 
@@ -12,9 +13,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent {
   userIsLoggedIn: boolean;
+  notificationCount = 0;
   constructor(
     private platform: Platform,
     private authService: AuthService,
+    private ticketService: TicketService,
     private menuController: MenuController,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
@@ -26,11 +29,13 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-    });
-    this.authService.loggedInUserEvent.subscribe(data => {
-      this.userIsLoggedIn = data;
-      console.log(this.userIsLoggedIn);
 
+      this.authService.loggedInUserEvent.subscribe(data => {
+        this.userIsLoggedIn = data;
+        this.ticketService.getNotifications().subscribe(notifications => {
+          this.notificationCount = notifications.length;
+        });
+      });
     });
   }
 
@@ -44,5 +49,10 @@ export class AppComponent {
     localStorage.removeItem('jwt');
     localStorage.removeItem('user');
     this.close();
+  }
+
+  fetchNotifications() {
+
+
   }
 }

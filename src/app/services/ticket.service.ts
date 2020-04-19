@@ -6,6 +6,7 @@ import { Ticket } from '../commons/ticket';
 import { Project } from '../commons/project';
 import { Developer } from '../commons/developer';
 import { Note } from '../commons/note';
+import {Notify} from '../commons/notify';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +73,12 @@ export class TicketService {
   getDevelopers() {
     return this.http.get<DeveloperResponse>('http://localhost:8080/developers').pipe(
       map(response => response._embedded.developers)
+    );
+  }
+
+  getNotifications() {
+    return this.http.get<Notify[]>('http://localhost:8080/get-notifications').pipe(
+      map(response => response)
     );
   }
 

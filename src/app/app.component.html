@@ -18,6 +18,11 @@
           </ion-label>
         </ion-item>
 
+        <ion-item routerLink="notifications" (click)="close()" *ngIf="userIsLoggedIn" >
+          <ion-label>Notifications</ion-label>
+          <ion-badge slot="end">{{notificationCount}}</ion-badge>
+        </ion-item>
+
         <ion-item routerLink="login"  (click)="logout()">
           <ion-label *ngIf="userIsLoggedIn">
             Logout

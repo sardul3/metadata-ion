@@ -1,3 +1,4 @@
+import { MentionsComponent } from './components/ticket/mentions/mentions.component';
 import { TicketDetailComponent } from './components/ticket/ticket-detail/ticket-detail.component';
 import { SearchAndFilterComponent } from './components/search-and-filter/search-and-filter.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -24,13 +25,15 @@ import { AppRoutingModule } from './app-routing.module';
 
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { AuthGuard } from './services/auth/auth.guard';
+import { NotificationsComponent } from './components/ticket/notifications/notifications.component';
 
 
 @NgModule({
   declarations: [AppComponent,  HomepageComponent, MetadataDetailComponent,
                  MetadataListComponent, TicketListComponent, CreateTicketComponent,
-                TimeAgoPipe, AddDevelopersComponent, LoginComponent, SignupComponent, SearchAndFilterComponent, TicketDetailComponent],
-  entryComponents: [CreateTicketComponent, AddDevelopersComponent],
+                TimeAgoPipe, AddDevelopersComponent, LoginComponent, SignupComponent, SearchAndFilterComponent, TicketDetailComponent,
+                NotificationsComponent, MentionsComponent],
+  entryComponents: [CreateTicketComponent, AddDevelopersComponent, MentionsComponent],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
