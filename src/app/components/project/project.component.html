@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mesonet</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-fab vertical="top" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="openPicker()">
+      <ion-icon name="filter-outline" ></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+<vertical-timeline style="overflow: scroll;">
+ 
+  <vertical-timeline-card *ngFor="let ticket of tickets" [dateValue]="ticket.createdOn">
+    <ion-card-header>
+      <ion-card-title>{{ticket.title}} </ion-card-title>
+      
+      <ion-card-subtitle>Created by {{ticket.createdBy}}</ion-card-subtitle>
+
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{ticket.description}}
+    </ion-card-content>
+
+    <ion-chip color="secondary">
+      <ion-label color="dark">Developers: {{ticket.developers.length}}</ion-label>
+    </ion-chip>
+
+    <ion-chip color="secondary">
+      <ion-label color="dark">Notes: {{ticket.notes.length}}</ion-label>
+    </ion-chip>
+
+    <ion-chip color="secondary">
+      <ion-label color="dark">Status: {{ticket.status}}
+      </ion-label>
+    </ion-chip>
+
+  </vertical-timeline-card>
+</vertical-timeline>
+
+</ion-content>

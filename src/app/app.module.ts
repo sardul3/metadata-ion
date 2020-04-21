@@ -1,3 +1,4 @@
+import { ProjectComponent } from './components/project/project.component';
 import { MentionsComponent } from './components/ticket/mentions/mentions.component';
 import { TicketDetailComponent } from './components/ticket/ticket-detail/ticket-detail.component';
 import { SearchAndFilterComponent } from './components/search-and-filter/search-and-filter.component';
@@ -27,14 +28,19 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 import { AuthGuard } from './services/auth/auth.guard';
 import { NotificationsComponent } from './components/ticket/notifications/notifications.component';
 
+import { VerticalTimelineModule } from 'angular-vertical-timeline';
+
+
 
 @NgModule({
   declarations: [AppComponent,  HomepageComponent, MetadataDetailComponent,
                  MetadataListComponent, TicketListComponent, CreateTicketComponent,
                 TimeAgoPipe, AddDevelopersComponent, LoginComponent, SignupComponent, SearchAndFilterComponent, TicketDetailComponent,
-                NotificationsComponent, MentionsComponent],
+                NotificationsComponent, MentionsComponent, ProjectComponent],
   entryComponents: [CreateTicketComponent, AddDevelopersComponent, MentionsComponent],
-  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
+  imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, FormsModule,
+            VerticalTimelineModule
+            ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
     StatusBar,

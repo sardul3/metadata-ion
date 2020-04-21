@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AuthGuard } from './services/auth/auth.guard';
 import { NotificationsComponent } from './components/ticket/notifications/notifications.component';
+import { ProjectComponent } from './components/project/project.component';
 
 const routes: Routes = [
   // { path: '', component: HomepageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
@@ -15,6 +16,8 @@ const routes: Routes = [
   {path: 'ticket/:id', component: TicketDetailComponent, canActivate: [AuthGuard] },
   { path: 'ticket', component: TicketListComponent, canActivate: [AuthGuard] },
   { path: 'notifications', component: NotificationsComponent, canActivate: [AuthGuard] },
+  { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
+
 
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },

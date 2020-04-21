@@ -14,9 +14,12 @@
         <ion-list>
           <ion-item *ngFor="let notification of notifications">
             <ion-label>
-              <h2> {{notification.message}}</h2>
+              <h2 class="ion-text-wrap"> {{notification.message}}</h2>
               <p>{{notification.createdAt | timeAgo}}</p>
             </ion-label>
+            <ion-button (click)="deleteNotification(notification)">
+              <ion-icon slot="icon-only" name="remove-circle-outline" ></ion-icon>              
+            </ion-button>
           </ion-item>
         </ion-list>
       </ion-col>

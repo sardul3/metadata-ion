@@ -8,6 +8,8 @@ import { Developer } from '../commons/developer';
 import { Note } from '../commons/note';
 import {Notify} from '../commons/notify';
 
+import * as Stomp from 'stompjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,6 +33,12 @@ export class TicketService {
       map(response => response)
     );
   }
+
+  // getProjects() {
+  //   return this.http.get<Project[]>('http://localhost:8080/projects').pipe(
+  //     map(response => response)
+  //   );
+  // }
 
   getTicket(id: number) {
     return this.http.get<Ticket>(`http://localhost:8080/get-ticket/${id}`).pipe(
@@ -82,6 +90,12 @@ export class TicketService {
     );
   }
 
+  readNotification(notifyId: number) {
+    return this.http.post<Notify>('http://localhost:8080/read-notification', {id: notifyId}).pipe(
+      map(response => response)
+    );
+  }
+
   assignDeveloperToTicket(ticketId: number, developerId: number) {
     return this.http.post('http://localhost:8080/add-developer', {ticketId, developerId});
   }
@@ -91,11 +105,11 @@ export class TicketService {
   }
 
   assignNoteToTicket( noteText: string, createdAt: Date, ticketId: number) {
-    const createdBy = this.authService.getUsername();
-    return this.http.post<NoteInterface>('http://localhost:8080/add-note', {text: noteText, createdAt, ticketId, createdBy }).pipe(
+      const createdBy = this.authService.getUsername();
+      return this.http.post<NoteInterface>('http://localhost:8080/add-note', {text: noteText, createdAt, ticketId, createdBy }).pipe(
       map(response => response.notes)
     );
-  }
+}
 }
 
 

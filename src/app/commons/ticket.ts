@@ -12,5 +12,4 @@ export class Ticket {
     developers: Developer[];
     notes: Note[];
     status: string;
-
   }

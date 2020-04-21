@@ -106,4 +106,17 @@ seeStatus(check) {
   this.ticketService.filterByAuthor.emit(!check.checked);
 }
 
+mapStatus(status: string) {
+  switch (status) {
+    case 'Not Started':
+      return 'danger';
+    case 'Initiated':
+      return 'secondary';
+    case 'Almost Done':
+      return 'tertiary';
+    case 'Ticket resolved':
+      return 'success';
+  }
+}
+
 }

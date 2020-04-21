@@ -27,7 +27,11 @@
       <ion-col size-sm="12" size-md="6" size-lg="3" *ngFor="let ticket of filteredTickets" >
         <ion-card color="primary">
           <ion-card-header>
-            <ion-card-title>{{ticket.title}}</ion-card-title>
+            <ion-card-title>{{ticket.title}}
+              <!-- <div> -->
+                <!-- {{ticket.status}} -->
+              <!-- </div> -->
+            </ion-card-title>
             <ion-card-subtitle>{{ticket.createdBy}} | {{ticket.project?.name}}</ion-card-subtitle>
             <ion-card-subtitle>{{ticket.description}}</ion-card-subtitle>
             <ion-card-subtitle>{{ticket.createdOn | timeAgo}} </ion-card-subtitle>

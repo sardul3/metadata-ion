@@ -33,7 +33,7 @@ export class AppComponent {
       this.authService.loggedInUserEvent.subscribe(data => {
         this.userIsLoggedIn = data;
         this.ticketService.getNotifications().subscribe(notifications => {
-          this.notificationCount = notifications.length;
+          this.notificationCount = notifications.filter(notification => !notification.seen).length;
         });
       });
     });

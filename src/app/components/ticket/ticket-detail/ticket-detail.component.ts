@@ -41,7 +41,6 @@ export class TicketDetailComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-
     this.route.paramMap.subscribe(data => {
       if (this.route.snapshot.paramMap.has('id')) {
         this.ticketId = +this.route.snapshot.paramMap.get('id');
