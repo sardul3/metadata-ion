@@ -6,6 +6,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ticket } from 'src/app/commons/ticket';
 import { TicketService } from 'src/app/services/ticket.service';
 import { ModalController, ToastController, AlertController, PopoverController, IonReorderGroup } from '@ionic/angular';
+import { FilterComponent } from '../filter/filter.component';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class TicketListComponent implements OnInit {
 
   ionViewWillEnter() {
     this.ticketService.filterByAuthor.subscribe(data => {
+      console.log(data);
       if (data) {
         this.filteredTickets = this.tickets.filter(ticket => ticket.createdBy === this.authService.getUsername());
       } else {
@@ -125,6 +127,15 @@ getShortDesc(desc: string) {
     return desc.substring(0, 50) + '...';
   }
   return desc;
+}
+
+async presentPopover(ev: any) {
+  const popover = await this.popoverController.create({
+    component: FilterComponent,
+    event: ev,
+    translucent: true
+  });
+  return await popover.present();
 }
 
 }

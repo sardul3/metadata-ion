@@ -2,6 +2,7 @@
   <ion-toolbar color="primary">
     <ion-title>{{ticket.title}}</ion-title>
     <ion-buttons slot="start">
+      <ion-back-button defaultHref="ticket"></ion-back-button>
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
@@ -123,7 +124,7 @@
             </ion-row>
 
             <ion-row *ngIf="notes?.length <= 0 || notes===undefined || notes===null">
-              <ion-col size-md="6" size-sm="12" size-xs="12" offset-md="3" offset-sm="0" offset-xs="0">
+              <ion-col size-md="8" size-sm="12" size-xs="12" offset-md="2" offset-sm="0" offset-xs="0">
                 <ion-card color="warning">
                   <ion-card-header>
                     <ion-card-title>

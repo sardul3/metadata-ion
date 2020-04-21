@@ -25,5 +25,8 @@ export class CreateProjectComponent implements OnInit {
                       });
 
   }
+  closeModal() {
+    this.modalController.dismiss();
+  }
 
 }

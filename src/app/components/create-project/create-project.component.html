@@ -1,3 +1,14 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>New Project</ion-title>
+    <ion-buttons slot="end"> 
+      <ion-button>
+      <ion-icon slot="icon-only" padding name="close-outline" (click)="closeModal()" ></ion-icon> 
+    </ion-button>             
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
   <form #createProject="ngForm" (ngSubmit)="submitProject(createProject.form)" class="ion-padding ion-margin" style="margin-top: 10vh;" >
     <ion-list>
@@ -9,7 +20,6 @@
         <ion-label position="floating">Nickname</ion-label>
         <ion-textarea name="projectNickname" ngModel #nicknameField="ngModel" required></ion-textarea>
       </ion-item>
-      
     
       <ion-button type="submit" expand="block" [disabled]="!createProject.valid" class="inputField">Create</ion-button>
     </ion-list>

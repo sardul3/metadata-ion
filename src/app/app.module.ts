@@ -1,3 +1,4 @@
+import { FilterComponent } from './components/ticket/filter/filter.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { ProjectComponent } from './components/project/project.component';
 import { MentionsComponent } from './components/ticket/mentions/mentions.component';
@@ -37,8 +38,8 @@ import { VerticalTimelineModule } from 'angular-vertical-timeline';
   declarations: [AppComponent,  HomepageComponent, MetadataDetailComponent,
                  MetadataListComponent, TicketListComponent, CreateTicketComponent,
                 TimeAgoPipe, AddDevelopersComponent, LoginComponent, SignupComponent, SearchAndFilterComponent, TicketDetailComponent,
-                NotificationsComponent, MentionsComponent, ProjectComponent, CreateProjectComponent],
-  entryComponents: [CreateTicketComponent, AddDevelopersComponent, MentionsComponent, CreateProjectComponent],
+                NotificationsComponent, MentionsComponent, ProjectComponent, CreateProjectComponent, FilterComponent],
+  entryComponents: [CreateTicketComponent, AddDevelopersComponent, MentionsComponent, CreateProjectComponent, FilterComponent],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, FormsModule,
             VerticalTimelineModule
             ],

@@ -29,8 +29,10 @@ export class CreateTicketComponent implements OnInit {
     });
     form.reset();
     this.modalController.dismiss();
+  }
 
-
+  closeModal() {
+    this.modalController.dismiss();
   }
 
 }

@@ -6,17 +6,16 @@
     </ion-buttons>  
       <ion-title> Tickets </ion-title>
 
-      <ion-buttons slot="secondary">
-        <app-search-and-filter></app-search-and-filter>
-        <!-- <ion-chip>
-          <ion-label for="checkBox">Created by me</ion-label>
-          <ion-checkbox  id="checkBox" slot="start" #check (click)="seeStatus(check)"></ion-checkbox>
-      </ion-chip> -->
+      <ion-buttons slot="end">
+        <ion-button  (click)="presentPopover($event)">
+        <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
+    </ion-button>
       </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
   <ion-grid>
     <!-- <ion-row class="ion-padding">
       <ion-col size="3">
@@ -32,7 +31,26 @@
       </ion-col>
     </ion-row> -->
 
-    <ion-row>
+    <ion-row *ngIf="filteredTickets?.length > 0">
+      <ion-col size-sm="12" size-md="6" size-lg="4" offset-md="3" offset-lg="4">
+        <app-search-and-filter></app-search-and-filter>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="filteredTickets?.length <= 0 || filteredTickets===undefined || filteredTickets===null">
+      <ion-col size-md="8" size-sm="12" size-xs="12" offset-md="2" offset-sm="0" offset-xs="0">
+        <ion-card color="warning">
+          <ion-card-header>
+            <ion-card-title>
+              No tickets are present at the moment
+            </ion-card-title>
+            <ion-label>Please add some tickets</ion-label>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="filteredTickets?.length > 0">
       <ion-col size-sm="12" size-md="6" size-lg="3" *ngFor="let ticket of filteredTickets" >
         <ion-card color="primary">
           <ion-card-header>
@@ -65,8 +83,8 @@
   </ion-grid>
 </ion-content>
 
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="presentModal()">
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+  <ion-fab-button (click)="presentModal()" color="tertiary">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

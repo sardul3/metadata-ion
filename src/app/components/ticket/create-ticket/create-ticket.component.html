@@ -1,3 +1,14 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>New Ticket</ion-title>
+    <ion-buttons slot="end"> 
+      <ion-button>
+      <ion-icon slot="icon-only" padding name="close-outline" (click)="closeModal()" ></ion-icon>    
+      </ion-button>          
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
       <form #createTicket="ngForm" (ngSubmit)="submitTicket(createTicket.form)" class="ion-padding ion-margin" >
         <ion-list>
@@ -11,7 +22,7 @@
           </ion-item>
           <ion-item class="inputField">
             <ion-label>Project</ion-label>
-            <ion-select placeholder="Select One" name="ticketProject" ngModel #projectField="ngModel" required>
+            <ion-select placeholder="Select one project" name="ticketProject" ngModel #projectField="ngModel" required>
               <ion-select-option *ngFor="let project of availableProjects" [value]="project.id">{{project.name}}</ion-select-option>
             </ion-select>
           </ion-item>

@@ -17,7 +17,7 @@
               <h2 class="ion-text-wrap"> {{notification.message}}</h2>
               <p>{{notification.createdAt | timeAgo}}</p>
             </ion-label>
-            <ion-button (click)="deleteNotification(notification)">
+            <ion-button (click)="deleteNotification(notification)" color="warning">
               <ion-icon slot="icon-only" name="remove-circle-outline" ></ion-icon>              
             </ion-button>
           </ion-item>
