@@ -13,8 +13,8 @@ import { CreateTicketComponent } from '../ticket/create-ticket/create-ticket.com
 export class ProjectComponent implements OnInit {
   tickets;
   selectedProject: number;
+  selectedProjectName: string;
   allProjects;
-  header: string;
 
   constructor(private ticketService: TicketService,
               private pickerController: PickerController,
@@ -30,10 +30,8 @@ export class ProjectComponent implements OnInit {
       if (this.selectedProject) {
       // tslint:disable-next-line: max-line-length
       this.tickets = this.tickets.filter(ticket => ticket.project.id === this.selectedProject).sort((a, b) => (a.createdOn < b.createdOn) ? 1 : -1);
-      this.header = `Tickets in ${this.selectedProject}`;
       } else {
       this.tickets = this.tickets.sort((a, b) => (a.createdOn < b.createdOn) ? 1 : -1);
-      this.header = `All Tickets`;
 
       }
       console.log(this.tickets);
@@ -45,7 +43,6 @@ export class ProjectComponent implements OnInit {
   }
 
   async openPicker() {
-    console.log(this.getColumnOptions());
     const picker = await this.pickerController.create({
       buttons: [
         {
@@ -56,6 +53,8 @@ export class ProjectComponent implements OnInit {
         text: 'Ok',
         handler: (value: any) => {
           this.selectedProject = value.Projects.value;
+          this.selectedProjectName = value.Projects.text;
+          console.log(this.selectedProjectName);
           this.ionViewWillEnter();
         }
       }],

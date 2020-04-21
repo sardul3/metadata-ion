@@ -10,7 +10,7 @@ import { NotificationsComponent } from './components/ticket/notifications/notifi
 import { ProjectComponent } from './components/project/project.component';
 
 const routes: Routes = [
-  // { path: '', component: HomepageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: 'metadata', component: HomepageComponent, pathMatch: 'full', canActivate: [AuthGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full'},
 
   {path: 'ticket/:id', component: TicketDetailComponent, canActivate: [AuthGuard] },

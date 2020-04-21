@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
 
   submitLogin(form) {
 
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('user');
     this.authService.executeAuthService(form.value.username, form.value.password).subscribe(data => {
       this.authService.loggedInUserEvent.emit(true);
 

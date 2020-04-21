@@ -72,11 +72,11 @@ export class TicketService {
     );
   }
 
-  // getProject(ticketId: number) {
-  //   return this.http.get<Project>(`http://localhost:8080/tickets/${ticketId}/project`).pipe(take(1),
-  //     map(response => response)
-  //   );
-  // }
+  getProject(ticketId: number) {
+    return this.http.get<Project>(`http://localhost:8080/tickets/${ticketId}/project`).pipe(take(1),
+      map(response => response)
+    );
+  }
 
   deleteTicket(ticketId: number) {
     return this.http.delete(`http://localhost:8080/tickets/${ticketId}`).pipe(take(1),

@@ -15,9 +15,10 @@ import { ModalController, ToastController, AlertController, PopoverController, I
 })
 export class TicketListComponent implements OnInit {
   tickets;
-  filteredTickets;
-  searchText;
+  filteredTickets: Ticket[];
+  searchText: string;
   filterByAuthor;
+  displayDesc: string;
 
   constructor(private ticketService: TicketService,
               private modalController: ModalController,
@@ -117,6 +118,13 @@ mapStatus(status: string) {
     case 'Ticket resolved':
       return 'success';
   }
+}
+
+getShortDesc(desc: string) {
+  if (desc.length >= 50) {
+    return desc.substring(0, 50) + '...';
+  }
+  return desc;
 }
 
 }

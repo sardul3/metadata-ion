@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Mesonet</ion-title>
+    <ion-title>{{ticket.title}}</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
@@ -96,7 +96,7 @@
         </ion-card-header>
         <ion-card-content>
           <ion-grid >
-            <ion-row >
+            <ion-row *ngIf="notes?.length>0">
               <ion-col size="8" offset="2" style="overflow-y: scroll; height: 500px;" size-md="12" size-sm="12" size-xs="12" offset-md="0" offset-sm="0" offset-xs="0" >
               <ion-list lines="none">
                 <ion-item *ngFor="let note of notes">
@@ -121,6 +121,21 @@
               </ion-list>
             </ion-col>
             </ion-row>
+
+            <ion-row *ngIf="notes?.length <= 0 || notes===undefined || notes===null">
+              <ion-col size-md="6" size-sm="12" size-xs="12" offset-md="3" offset-sm="0" offset-xs="0">
+                <ion-card color="warning">
+                  <ion-card-header>
+                    <ion-card-title>
+                      No notes for {{ticket.title}}
+                    </ion-card-title>
+                    <ion-label>You can add notes and mention other devs using @</ion-label>
+                  </ion-card-header>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+
           </ion-grid>
 
           <ion-grid>
@@ -139,6 +154,8 @@
                   </ion-button>
               </ion-col>
             </ion-row>
+
+
           </form>
           </ion-grid>  
           

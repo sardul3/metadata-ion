@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Mesonet</ion-title>
+    <ion-title>Notifications</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
@@ -24,5 +24,19 @@
         </ion-list>
       </ion-col>
     </ion-row>
+
+    <ion-row *ngIf="notifications?.length <= 0 || notifications===undefined || notifications===null">
+    <ion-col size-md="6" size-sm="12" size-xs="12" offset-md="3" offset-sm="0" offset-xs="0">
+      <ion-card color="warning">
+        <ion-card-header>
+          <ion-card-title>
+            No notifications present
+          </ion-card-title>
+          <ion-label>If you have any mentions or if someone adds you to a ticket, there will be entries here</ion-label>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
   </ion-grid>
 </ion-content>

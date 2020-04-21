@@ -53,14 +53,14 @@ export class TicketDetailComponent implements OnInit {
             this.ticketService.getDevelopers().subscribe(devs => {
               this.allDevelopers = devs.filter(dev => dev.name !== this.loggedInUser.username);
               this.inviteDevelopers = this.allDevelopers.filter(dev => !this.isDeveloperPresent(dev));
+              this.rangeLabel = this.ticket.status;
+              this.notes = ticket.notes.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1);
+              this.developers = ticket.developers.filter(dev => dev.name !== this.loggedInUser.username);
+              this.inviteDevelopers = this.allDevelopers.filter(dev => !this.isDeveloperPresent(dev));
+              this.rangeLabel = this.ticket.status;
+              this.rangeColor = this.mapStatus(this.rangeLabel)[0];
+              this.rangeValue = +this.mapStatus(this.rangeLabel)[1];
             });
-            this.rangeLabel = this.ticket.status;
-            this.notes = ticket.notes.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1);
-            this.developers = ticket.developers.filter(dev => dev.name !== this.loggedInUser.username);
-            this.inviteDevelopers = this.allDevelopers.filter(dev => !this.isDeveloperPresent(dev));
-            this.rangeLabel = this.ticket.status;
-            this.rangeColor = this.mapStatus(this.rangeLabel)[0];
-            this.rangeValue = +this.mapStatus(this.rangeLabel)[1];
           }
         });
       }
