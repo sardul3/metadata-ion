@@ -12,9 +12,16 @@
             Metadata 
           </ion-label>
         </ion-item>
+
         <ion-item routerLink="ticket" (click)="close()" *ngIf="userIsLoggedIn">
           <ion-label>
             Ticket
+          </ion-label>
+        </ion-item>
+
+        <ion-item routerLink="project" (click)="close()" *ngIf="userIsLoggedIn">
+          <ion-label>
+            Project
           </ion-label>
         </ion-item>
 

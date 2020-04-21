@@ -1,15 +1,24 @@
 <ion-header>
+
   <ion-toolbar color="primary">
-    <ion-title>Mesonet</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
-    </ion-buttons>
+    </ion-buttons>  
+      <ion-title>Mesonet</ion-title>
+
+      <ion-buttons slot="secondary">
+        <app-search-and-filter></app-search-and-filter>
+        <!-- <ion-chip>
+          <ion-label for="checkBox">Created by me</ion-label>
+          <ion-checkbox  id="checkBox" slot="start" #check (click)="seeStatus(check)"></ion-checkbox>
+      </ion-chip> -->
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row class="ion-padding">
+    <!-- <ion-row class="ion-padding">
       <ion-col size="3">
         <app-search-and-filter></app-search-and-filter>
       </ion-col>
@@ -21,7 +30,7 @@
         </ion-item>
       </ion-button>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
     <ion-row>
       <ion-col size-sm="12" size-md="6" size-lg="3" *ngFor="let ticket of filteredTickets" >
@@ -33,7 +42,8 @@
               <!-- </div> -->
             </ion-card-title>
             <ion-card-subtitle>{{ticket.createdBy}} | {{ticket.project?.name}}</ion-card-subtitle>
-            <ion-card-subtitle>{{ticket.description}}</ion-card-subtitle>
+            <ion-card-subtitle>{{ticket.description.substring(0,50)}}</ion-card-subtitle>
+
             <ion-card-subtitle>{{ticket.createdOn | timeAgo}} </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
@@ -60,4 +70,5 @@
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>
+
 

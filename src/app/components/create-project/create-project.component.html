@@ -1,0 +1,18 @@
+<ion-content>
+  <form #createProject="ngForm" (ngSubmit)="submitProject(createProject.form)" class="ion-padding ion-margin" style="margin-top: 10vh;" >
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input name="projectName" ngModel #nameField="ngModel" required></ion-input>
+      </ion-item>
+      <ion-item class="inputField">
+        <ion-label position="floating">Nickname</ion-label>
+        <ion-textarea name="projectNickname" ngModel #nicknameField="ngModel" required></ion-textarea>
+      </ion-item>
+      
+    
+      <ion-button type="submit" expand="block" [disabled]="!createProject.valid" class="inputField">Create</ion-button>
+    </ion-list>
+    
+    </form>
+</ion-content>

@@ -60,6 +60,12 @@ export class TicketService {
                 createdOn: new Date(), projectId });
   }
 
+  createProject(name: string, nickname: string) {
+    // tslint:disable-next-line: max-line-length
+    return this.http.post('http://localhost:8080/projects', {name, nickname,
+               owner: this.authService.userIsLoggedIn() ? localStorage.getItem('user') : 'admin' });
+  }
+
   getProjects() {
     return this.http.get<ProjectResponse>('http://localhost:8080/projects').pipe(
       map(response => response._embedded.projects)
