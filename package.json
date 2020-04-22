@@ -5,14 +5,16 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ionic build --prod"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~8.3.23",
     "@angular/common": "~8.2.14",
     "@angular/core": "~8.2.14",
     "@angular/forms": "~8.2.14",
@@ -25,6 +27,7 @@
     "@ionic/angular": "^5.0.0",
     "angular-vertical-timeline": "^0.6.0",
     "core-js": "^2.5.4",
+    "express": "^4.17.1",
     "net": "^1.0.2",
     "rxjs": "~6.5.1",
     "sockjs-client": "^1.4.0",

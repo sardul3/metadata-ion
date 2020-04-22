@@ -17,19 +17,6 @@
 <ion-content>
 
   <ion-grid>
-    <!-- <ion-row class="ion-padding">
-      <ion-col size="3">
-        <app-search-and-filter></app-search-and-filter>
-      </ion-col>
-      <ion-col size="2" class="ion-align-item-center">
-        <ion-button shape="round" fill="outline" strong="true">
-          <ion-item>
-          <ion-label for="checkBox">Created by me</ion-label>
-          <ion-checkbox  id="checkBox" slot="start" #check (click)="seeStatus(check)"></ion-checkbox>
-        </ion-item>
-      </ion-button>
-      </ion-col>
-    </ion-row> -->
 
     <ion-row *ngIf="filteredTickets?.length > 0">
       <ion-col size-sm="12" size-md="6" size-lg="4" offset-md="3" offset-lg="4">

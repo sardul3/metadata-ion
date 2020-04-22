@@ -1,3 +1,4 @@
+import { TicketListComponent } from './components/ticket/ticket-list/ticket-list.component';
 import { FilterComponent } from './components/ticket/filter/filter.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { ProjectComponent } from './components/project/project.component';
@@ -10,7 +11,6 @@ import { LoginComponent } from './components/login/login.component';
 import { AddDevelopersComponent } from './components/ticket/add-developers/add-developers.component';
 import { FormsModule } from '@angular/forms';
 import { CreateTicketComponent } from './components/ticket/create-ticket/create-ticket.component';
-import { TicketListComponent } from './components/ticket/ticket-list/ticket-list.component';
 import { MetadataListComponent } from './components/metadata-list/metadata-list.component';
 import { MetadataDetailComponent } from './components/metadata-detail/metadata-detail.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
