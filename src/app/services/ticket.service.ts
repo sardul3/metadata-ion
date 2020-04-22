@@ -29,7 +29,7 @@ export class TicketService {
 
 
   getTickets() {
-    return this.http.get('http://localhost:8080/get-tickets').pipe(
+    return this.http.get('https://warm-falls-42436.herokuapp.com/get-tickets').pipe(
       map(response => response)
     );
   }
@@ -41,13 +41,13 @@ export class TicketService {
   // }
 
   getTicket(id: number) {
-    return this.http.get<Ticket>(`http://localhost:8080/get-ticket/${id}`).pipe(
+    return this.http.get<Ticket>(`https://warm-falls-42436.herokuapp.com/get-ticket/${id}`).pipe(
       map(response => response)
     );
   }
 
   setStatus(ticketId: number, status: string) {
-    return this.http.post<Ticket>(`http://localhost:8080/set-status`, {ticketId, status}).pipe(
+    return this.http.post<Ticket>(`https://warm-falls-42436.herokuapp.com/set-status`, {ticketId, status}).pipe(
       map(response => response)
     );
   }
@@ -55,64 +55,65 @@ export class TicketService {
   createTicket(title: string, description: string, projectId: number) {
     // tslint:disable-next-line: max-line-length
     console.log(new Date());
-    return this.http.post('http://localhost:8080/create-ticket', {title, description,
+    return this.http.post('https://warm-falls-42436.herokuapp.com/create-ticket', {title, description,
                createdBy: this.authService.userIsLoggedIn() ? localStorage.getItem('user') : 'admin',
                 createdOn: new Date(), projectId });
   }
 
   createProject(name: string, nickname: string) {
     // tslint:disable-next-line: max-line-length
-    return this.http.post('http://localhost:8080/projects', {name, nickname,
+    return this.http.post('https://warm-falls-42436.herokuapp.com/projects', {name, nickname,
                owner: this.authService.userIsLoggedIn() ? localStorage.getItem('user') : 'admin' });
   }
 
   getProjects() {
-    return this.http.get<ProjectResponse>('http://localhost:8080/projects').pipe(
+    return this.http.get<ProjectResponse>('https://warm-falls-42436.herokuapp.com/projects').pipe(
       map(response => response._embedded.projects)
     );
   }
 
   getProject(ticketId: number) {
-    return this.http.get<Project>(`http://localhost:8080/tickets/${ticketId}/project`).pipe(take(1),
+    return this.http.get<Project>(`https://warm-falls-42436.herokuapp.com/tickets/${ticketId}/project`).pipe(take(1),
       map(response => response)
     );
   }
 
   deleteTicket(ticketId: number) {
-    return this.http.delete(`http://localhost:8080/tickets/${ticketId}`).pipe(take(1),
+    return this.http.delete(`https://warm-falls-42436.herokuapp.com/tickets/${ticketId}`).pipe(take(1),
       map(response => response)
     );
   }
 
   getDevelopers() {
-    return this.http.get<DeveloperResponse>('http://localhost:8080/developers').pipe(
+    return this.http.get<DeveloperResponse>('https://warm-falls-42436.herokuapp.com/developers').pipe(
       map(response => response._embedded.developers)
     );
   }
 
   getNotifications() {
-    return this.http.get<Notify[]>('http://localhost:8080/get-notifications').pipe(
+    return this.http.get<Notify[]>('https://warm-falls-42436.herokuapp.com/get-notifications').pipe(
       map(response => response)
     );
   }
 
   readNotification(notifyId: number) {
-    return this.http.post<Notify>('http://localhost:8080/read-notification', {id: notifyId}).pipe(
+    return this.http.post<Notify>('https://warm-falls-42436.herokuapp.com/read-notification', {id: notifyId}).pipe(
       map(response => response)
     );
   }
 
   assignDeveloperToTicket(ticketId: number, developerId: number) {
-    return this.http.post('http://localhost:8080/add-developer', {ticketId, developerId});
+    return this.http.post('https://warm-falls-42436.herokuapp.com/add-developer', {ticketId, developerId});
   }
 
   removeDeveloperFromTicket(devId: number, ticketId: number) {
-    return this.http.post('http://localhost:8080/remove-developer', {devId, ticketId});
+    return this.http.post('https://warm-falls-42436.herokuapp.com/remove-developer', {devId, ticketId});
   }
 
   assignNoteToTicket( noteText: string, createdAt: Date, ticketId: number) {
       const createdBy = this.authService.getUsername();
-      return this.http.post<NoteInterface>('http://localhost:8080/add-note', {text: noteText, createdAt, ticketId, createdBy }).pipe(
+      // tslint:disable-next-line: max-line-length
+      return this.http.post<NoteInterface>('https://warm-falls-42436.herokuapp.com/add-note', {text: noteText, createdAt, ticketId, createdBy }).pipe(
       map(response => response.notes)
     );
 }
