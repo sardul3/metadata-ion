@@ -31,6 +31,8 @@ import { AuthGuard } from './services/auth/auth.guard';
 import { NotificationsComponent } from './components/ticket/notifications/notifications.component';
 
 import { VerticalTimelineModule } from 'angular-vertical-timeline';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 
@@ -41,7 +43,8 @@ import { VerticalTimelineModule } from 'angular-vertical-timeline';
                 NotificationsComponent, MentionsComponent, ProjectComponent, CreateProjectComponent, FilterComponent],
   entryComponents: [CreateTicketComponent, AddDevelopersComponent, MentionsComponent, CreateProjectComponent, FilterComponent],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, FormsModule,
-            VerticalTimelineModule
+            VerticalTimelineModule,
+            ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
             ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
