@@ -1150,14 +1150,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./src/app/components/project/project.component.ts");
 
     var routes = [{
+      path: 'login',
+      component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"]
+    }, {
+      path: 'signup',
+      component: _components_signup_signup_component__WEBPACK_IMPORTED_MODULE_7__["SignupComponent"]
+    }, {
       path: 'metadata',
       component: _components_homepage_homepage_component__WEBPACK_IMPORTED_MODULE_2__["HomepageComponent"],
       pathMatch: 'full',
       canActivate: [_services_auth_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]]
-    }, {
-      path: '',
-      redirectTo: '/login',
-      pathMatch: 'full'
     }, {
       path: 'ticket/:id',
       component: _components_ticket_ticket_detail_ticket_detail_component__WEBPACK_IMPORTED_MODULE_1__["TicketDetailComponent"],
@@ -1175,12 +1177,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       component: _components_project_project_component__WEBPACK_IMPORTED_MODULE_10__["ProjectComponent"],
       canActivate: [_services_auth_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]]
     }, {
-      path: 'login',
-      component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"]
-    }, {
-      path: 'signup',
-      component: _components_signup_signup_component__WEBPACK_IMPORTED_MODULE_7__["SignupComponent"]
-    }, {
       path: 'home',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
@@ -1191,6 +1187,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return m.HomePageModule;
         });
       }
+    }, {
+      path: '',
+      redirectTo: '/login',
+      pathMatch: 'full'
     }];
 
     var AppRoutingModule = function AppRoutingModule() {
@@ -4079,14 +4079,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getUser",
         value: function getUser() {
-          return this.http.get('http://localhost:8080/get-user').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) {
+          return this.http.get('https://warm-falls-42436.herokuapp.com/get-user').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) {
             return response;
           }));
         }
       }, {
         key: "executeAuthService",
         value: function executeAuthService(username, password) {
-          return this.http.post('http://localhost:8080/authenticate', {
+          return this.http.post('https://warm-falls-42436.herokuapp.com/authenticate', {
             username: username,
             password: password
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) {
@@ -4097,7 +4097,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "registerUser",
         value: function registerUser(username, email, password) {
-          return this.http.post('http://localhost:8080/signup', {
+          return this.http.post('https://warm-falls-42436.herokuapp.com/signup', {
             username: username,
             email: email,
             password: password
@@ -4109,7 +4109,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "checkUsername",
         value: function checkUsername(username) {
           console.log(username);
-          return this.http.post('http://localhost:8080/check-username', {
+          return this.http.post('https://warm-falls-42436.herokuapp.com/check-username', {
             username: username
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) {
             return response;
@@ -4364,7 +4364,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getTickets",
         value: function getTickets() {
-          return this.http.get('http://localhost:8080/get-tickets').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
+          return this.http.get('https://warm-falls-42436.herokuapp.com/get-tickets').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
             return response;
           }));
         } // getProjects() {
@@ -4376,14 +4376,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getTicket",
         value: function getTicket(id) {
-          return this.http.get("http://localhost:8080/get-ticket/".concat(id)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
+          return this.http.get("https://warm-falls-42436.herokuapp.com/get-ticket/".concat(id)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
             return response;
           }));
         }
       }, {
         key: "setStatus",
         value: function setStatus(ticketId, status) {
-          return this.http.post("http://localhost:8080/set-status", {
+          return this.http.post("https://warm-falls-42436.herokuapp.com/set-status", {
             ticketId: ticketId,
             status: status
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
@@ -4395,7 +4395,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function createTicket(title, description, projectId) {
           // tslint:disable-next-line: max-line-length
           console.log(new Date());
-          return this.http.post('http://localhost:8080/create-ticket', {
+          return this.http.post('https://warm-falls-42436.herokuapp.com/create-ticket', {
             title: title,
             description: description,
             createdBy: this.authService.userIsLoggedIn() ? localStorage.getItem('user') : 'admin',
@@ -4407,7 +4407,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "createProject",
         value: function createProject(name, nickname) {
           // tslint:disable-next-line: max-line-length
-          return this.http.post('http://localhost:8080/projects', {
+          return this.http.post('https://warm-falls-42436.herokuapp.com/projects', {
             name: name,
             nickname: nickname,
             owner: this.authService.userIsLoggedIn() ? localStorage.getItem('user') : 'admin'
@@ -4416,42 +4416,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getProjects",
         value: function getProjects() {
-          return this.http.get('http://localhost:8080/projects').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
+          return this.http.get('https://warm-falls-42436.herokuapp.com/projects').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
             return response._embedded.projects;
           }));
         }
       }, {
         key: "getProject",
         value: function getProject(ticketId) {
-          return this.http.get("http://localhost:8080/tickets/".concat(ticketId, "/project")).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
+          return this.http.get("https://warm-falls-42436.herokuapp.com/tickets/".concat(ticketId, "/project")).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
             return response;
           }));
         }
       }, {
         key: "deleteTicket",
         value: function deleteTicket(ticketId) {
-          return this.http["delete"]("http://localhost:8080/tickets/".concat(ticketId)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
+          return this.http["delete"]("https://warm-falls-42436.herokuapp.com/tickets/".concat(ticketId)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
             return response;
           }));
         }
       }, {
         key: "getDevelopers",
         value: function getDevelopers() {
-          return this.http.get('http://localhost:8080/developers').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
+          return this.http.get('https://warm-falls-42436.herokuapp.com/developers').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
             return response._embedded.developers;
           }));
         }
       }, {
         key: "getNotifications",
         value: function getNotifications() {
-          return this.http.get('http://localhost:8080/get-notifications').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
+          return this.http.get('https://warm-falls-42436.herokuapp.com/get-notifications').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
             return response;
           }));
         }
       }, {
         key: "readNotification",
         value: function readNotification(notifyId) {
-          return this.http.post('http://localhost:8080/read-notification', {
+          return this.http.post('https://warm-falls-42436.herokuapp.com/read-notification', {
             id: notifyId
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (response) {
             return response;
@@ -4460,7 +4460,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "assignDeveloperToTicket",
         value: function assignDeveloperToTicket(ticketId, developerId) {
-          return this.http.post('http://localhost:8080/add-developer', {
+          return this.http.post('https://warm-falls-42436.herokuapp.com/add-developer', {
             ticketId: ticketId,
             developerId: developerId
           });
@@ -4468,7 +4468,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "removeDeveloperFromTicket",
         value: function removeDeveloperFromTicket(devId, ticketId) {
-          return this.http.post('http://localhost:8080/remove-developer', {
+          return this.http.post('https://warm-falls-42436.herokuapp.com/remove-developer', {
             devId: devId,
             ticketId: ticketId
           });
@@ -4476,8 +4476,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "assignNoteToTicket",
         value: function assignNoteToTicket(noteText, createdAt, ticketId) {
-          var createdBy = this.authService.getUsername();
-          return this.http.post('http://localhost:8080/add-note', {
+          var createdBy = this.authService.getUsername(); // tslint:disable-next-line: max-line-length
+
+          return this.http.post('https://warm-falls-42436.herokuapp.com/add-note', {
             text: noteText,
             createdAt: createdAt,
             ticketId: ticketId,

@@ -918,15 +918,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
+    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"] },
+    { path: 'signup', component: _components_signup_signup_component__WEBPACK_IMPORTED_MODULE_7__["SignupComponent"] },
     { path: 'metadata', component: _components_homepage_homepage_component__WEBPACK_IMPORTED_MODULE_2__["HomepageComponent"], pathMatch: 'full', canActivate: [_services_auth_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'ticket/:id', component: _components_ticket_ticket_detail_ticket_detail_component__WEBPACK_IMPORTED_MODULE_1__["TicketDetailComponent"], canActivate: [_services_auth_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
     { path: 'ticket', component: _components_ticket_ticket_list_ticket_list_component__WEBPACK_IMPORTED_MODULE_5__["TicketListComponent"], canActivate: [_services_auth_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
     { path: 'notifications', component: _components_ticket_notifications_notifications_component__WEBPACK_IMPORTED_MODULE_9__["NotificationsComponent"], canActivate: [_services_auth_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
     { path: 'project', component: _components_project_project_component__WEBPACK_IMPORTED_MODULE_10__["ProjectComponent"], canActivate: [_services_auth_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
-    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"] },
-    { path: 'signup', component: _components_signup_signup_component__WEBPACK_IMPORTED_MODULE_7__["SignupComponent"] },
     { path: 'home', loadChildren: () => __webpack_require__.e(/*! import() | home-home-module */ "home-home-module").then(__webpack_require__.bind(null, /*! ./home/home.module */ "./src/app/home/home.module.ts")).then(m => m.HomePageModule) },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -2603,20 +2603,20 @@ let AuthService = class AuthService {
         return localStorage.getItem('user');
     }
     getUser() {
-        return this.http.get('http://localhost:8080/get-user').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(response => response));
+        return this.http.get('https://warm-falls-42436.herokuapp.com/get-user').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(response => response));
     }
     executeAuthService(username, password) {
-        return this.http.post('http://localhost:8080/authenticate', { username, password }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(response => {
+        return this.http.post('https://warm-falls-42436.herokuapp.com/authenticate', { username, password }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(response => {
             localStorage.setItem('jwt', response.jwt);
             localStorage.setItem('user', response.loggedInUser);
         }));
     }
     registerUser(username, email, password) {
-        return this.http.post('http://localhost:8080/signup', { username, email, password }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(response => response));
+        return this.http.post('https://warm-falls-42436.herokuapp.com/signup', { username, email, password }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(response => response));
     }
     checkUsername(username) {
         console.log(username);
-        return this.http.post('http://localhost:8080/check-username', { username }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(response => response));
+        return this.http.post('https://warm-falls-42436.herokuapp.com/check-username', { username }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(response => response));
     }
 };
 AuthService.ctorParameters = () => [
@@ -2758,7 +2758,7 @@ let TicketService = class TicketService {
         return basicHeaderString;
     }
     getTickets() {
-        return this.http.get('http://localhost:8080/get-tickets').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
+        return this.http.get('https://warm-falls-42436.herokuapp.com/get-tickets').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
     }
     // getProjects() {
     //   return this.http.get<Project[]>('http://localhost:8080/projects').pipe(
@@ -2766,50 +2766,51 @@ let TicketService = class TicketService {
     //   );
     // }
     getTicket(id) {
-        return this.http.get(`http://localhost:8080/get-ticket/${id}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
+        return this.http.get(`https://warm-falls-42436.herokuapp.com/get-ticket/${id}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
     }
     setStatus(ticketId, status) {
-        return this.http.post(`http://localhost:8080/set-status`, { ticketId, status }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
+        return this.http.post(`https://warm-falls-42436.herokuapp.com/set-status`, { ticketId, status }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
     }
     createTicket(title, description, projectId) {
         // tslint:disable-next-line: max-line-length
         console.log(new Date());
-        return this.http.post('http://localhost:8080/create-ticket', { title, description,
+        return this.http.post('https://warm-falls-42436.herokuapp.com/create-ticket', { title, description,
             createdBy: this.authService.userIsLoggedIn() ? localStorage.getItem('user') : 'admin',
             createdOn: new Date(), projectId });
     }
     createProject(name, nickname) {
         // tslint:disable-next-line: max-line-length
-        return this.http.post('http://localhost:8080/projects', { name, nickname,
+        return this.http.post('https://warm-falls-42436.herokuapp.com/projects', { name, nickname,
             owner: this.authService.userIsLoggedIn() ? localStorage.getItem('user') : 'admin' });
     }
     getProjects() {
-        return this.http.get('http://localhost:8080/projects').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response._embedded.projects));
+        return this.http.get('https://warm-falls-42436.herokuapp.com/projects').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response._embedded.projects));
     }
     getProject(ticketId) {
-        return this.http.get(`http://localhost:8080/tickets/${ticketId}/project`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
+        return this.http.get(`https://warm-falls-42436.herokuapp.com/tickets/${ticketId}/project`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
     }
     deleteTicket(ticketId) {
-        return this.http.delete(`http://localhost:8080/tickets/${ticketId}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
+        return this.http.delete(`https://warm-falls-42436.herokuapp.com/tickets/${ticketId}`).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
     }
     getDevelopers() {
-        return this.http.get('http://localhost:8080/developers').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response._embedded.developers));
+        return this.http.get('https://warm-falls-42436.herokuapp.com/developers').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response._embedded.developers));
     }
     getNotifications() {
-        return this.http.get('http://localhost:8080/get-notifications').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
+        return this.http.get('https://warm-falls-42436.herokuapp.com/get-notifications').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
     }
     readNotification(notifyId) {
-        return this.http.post('http://localhost:8080/read-notification', { id: notifyId }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
+        return this.http.post('https://warm-falls-42436.herokuapp.com/read-notification', { id: notifyId }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response));
     }
     assignDeveloperToTicket(ticketId, developerId) {
-        return this.http.post('http://localhost:8080/add-developer', { ticketId, developerId });
+        return this.http.post('https://warm-falls-42436.herokuapp.com/add-developer', { ticketId, developerId });
     }
     removeDeveloperFromTicket(devId, ticketId) {
-        return this.http.post('http://localhost:8080/remove-developer', { devId, ticketId });
+        return this.http.post('https://warm-falls-42436.herokuapp.com/remove-developer', { devId, ticketId });
     }
     assignNoteToTicket(noteText, createdAt, ticketId) {
         const createdBy = this.authService.getUsername();
-        return this.http.post('http://localhost:8080/add-note', { text: noteText, createdAt, ticketId, createdBy }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response.notes));
+        // tslint:disable-next-line: max-line-length
+        return this.http.post('https://warm-falls-42436.herokuapp.com/add-note', { text: noteText, createdAt, ticketId, createdBy }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(response => response.notes));
     }
 };
 TicketService.ctorParameters = () => [
