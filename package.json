@@ -29,7 +29,7 @@
     "@ionic/angular": "^5.0.0",
     "angular-vertical-timeline": "^0.6.0",
     "core-js": "^2.5.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "net": "^1.0.2",
     "rxjs": "~6.5.1",
     "sockjs-client": "^1.4.0",
